@@ -8,16 +8,28 @@
     <title>AI-Guided Polymer Selection Platform</title>
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --success-color: #10b981;
-            --text-primary: #2d3748;
-            --text-secondary: #718096;
-            --border-color: #e2e8f0;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
-            --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+            --primary-color: #2c3e50;
+            --primary-dark: #1a252f;
+            --primary-light: #34495e;
+            --accent-color: #3498db;
+            --accent-hover: #2980b9;
+            --accent-light: #5dade2;
+            --success-color: #27ae60;
+            --success-light: #52c77d;
+            --warning-color: #f39c12;
+            --error-color: #e74c3c;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --text-muted: #95a5a6;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #ecf0f1;
+            --border-color: #dfe6e9;
+            --border-light: #e8ebed;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
 
         * {
@@ -28,7 +40,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             background-attachment: fixed;
             min-height: 100vh;
             padding: 40px 20px;
@@ -44,8 +56,8 @@
             width: 100%;
             height: 100%;
             background-image:
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(52, 152, 219, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(41, 128, 185, 0.06) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -80,7 +92,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 24px;
             padding: 60px 40px;
             box-shadow: var(--shadow-xl);
@@ -88,7 +100,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-light);
         }
 
         .header::before {
@@ -100,17 +112,14 @@
             height: 100%;
             background: linear-gradient(90deg,
                 transparent,
-                rgba(255, 255, 255, 0.4),
+                rgba(52, 152, 219, 0.05),
                 transparent
             );
             animation: shimmer 3s infinite;
         }
 
         h1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-color);
             font-size: 3em;
             font-weight: 800;
             margin-bottom: 15px;
@@ -127,7 +136,7 @@
         }
 
         .new-feature-tag {
-            color: #f5576c;
+            color: var(--accent-color);
             font-weight: 700;
             font-size: 1.1em;
             margin: 15px 0;
@@ -139,13 +148,13 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: var(--success-color);
             color: white;
             padding: 12px 24px;
             border-radius: 30px;
             font-weight: 600;
             margin: 15px 0;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.2);
             font-size: 0.95em;
             letter-spacing: 0.5px;
         }
@@ -184,7 +193,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: var(--primary-gradient);
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -192,7 +201,7 @@
         .card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
-            border-color: #667eea;
+            border-color: var(--accent-color);
         }
 
         .card:hover::before {
@@ -200,10 +209,7 @@
         }
 
         .card h2 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-color);
             margin-bottom: 20px;
             font-size: 1.6em;
             font-weight: 700;
@@ -239,7 +245,7 @@
         }
 
         .card li:hover {
-            color: #667eea;
+            color: var(--accent-color);
             padding-left: 32px;
         }
 
@@ -352,18 +358,18 @@
         }
 
         input:hover, select:hover {
-            border-color: #667eea;
+            border-color: var(--accent-color);
         }
 
         input:focus, select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
             transform: translateY(-2px);
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
             color: white;
             padding: 18px 40px;
             border: none;
@@ -373,7 +379,7 @@
             cursor: pointer;
             width: 100%;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25);
             position: relative;
             overflow: hidden;
             margin-top: 10px;
@@ -388,7 +394,7 @@
             height: 100%;
             background: linear-gradient(90deg,
                 transparent,
-                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.2),
                 transparent
             );
             transition: left 0.5s ease;
@@ -400,7 +406,7 @@
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.35);
         }
 
         .submit-btn:active {
@@ -459,12 +465,22 @@
         }
 
         .result-card h3 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-color);
             margin-bottom: 10px;
             font-weight: 700;
+        }
+
+        .result-title {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
         }
 
         .metric {
@@ -482,7 +498,7 @@
 
         .metric:hover {
             padding-left: 8px;
-            background: rgba(102, 126, 234, 0.05);
+            background: rgba(52, 152, 219, 0.05);
             margin: 0 -8px;
             padding-left: 16px;
             padding-right: 8px;
@@ -504,9 +520,9 @@
         .protocol-section {
             margin-top: 30px;
             padding: 30px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
             border-radius: 16px;
-            border: 2px solid #667eea;
+            border: 2px solid var(--accent-color);
         }
 
         .protocol-header {
@@ -517,7 +533,7 @@
         }
 
         .protocol-header h4 {
-            color: var(--text-primary);
+            color: var(--primary-color);
             font-size: 1.4em;
             font-weight: 700;
             display: flex;
@@ -526,14 +542,14 @@
         }
 
         .lab-ready-badge {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: var(--success-color);
             color: white;
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.75em;
             font-weight: 700;
             letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.2);
         }
 
         .protocol-content {
@@ -551,17 +567,17 @@
         }
 
         .protocol-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: var(--bg-tertiary);
             border-radius: 10px;
         }
 
         .protocol-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--accent-color);
             border-radius: 10px;
         }
 
         .protocol-content::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #5568d3 0%, #653a8e 100%);
+            background: var(--accent-hover);
         }
 
         .protocol-content pre {
@@ -594,25 +610,25 @@
         }
 
         .btn-copy {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
             color: white;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.25);
         }
 
         .btn-copy:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.35);
         }
 
         .btn-print {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, var(--success-color) 0%, var(--success-light) 100%);
             color: white;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.25);
         }
 
         .btn-print:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.35);
         }
 
         .loading {
@@ -627,6 +643,140 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        /* Custom Dropdown Styles */
+        .custom-select {
+            position: relative;
+            width: 100%;
+            user-select: none;
+        }
+
+        .select-trigger {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .select-trigger:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .select-trigger.active {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+        }
+
+        .select-trigger::after {
+            content: '▼';
+            font-size: 12px;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .select-trigger.active::after {
+            transform: rotate(180deg);
+        }
+
+        .select-trigger .placeholder {
+            color: var(--text-muted);
+        }
+
+        .custom-options {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            max-height: 280px;
+            overflow-y: auto;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            list-style: none;
+            padding: 8px;
+            margin: 0;
+        }
+
+        .custom-options.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .custom-options li {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .custom-options li::before {
+            content: '○';
+            color: var(--accent-color);
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+
+        .custom-options li:hover {
+            background: rgba(52, 152, 219, 0.08);
+            padding-left: 20px;
+        }
+
+        .custom-options li.selected {
+            background: rgba(52, 152, 219, 0.12);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .custom-options li.selected::before {
+            content: '●';
+            color: var(--accent-color);
+        }
+
+        .custom-options::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-options::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .custom-options::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .custom-options::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Hide original select */
+        select.hidden {
+            display: none;
         }
 
         /* Responsive Design */
@@ -715,31 +865,42 @@
                 border-radius: 16px;
             }
 
-            .result-card h3 {
+            .result-title {
                 font-size: 1.4em !important;
+                margin-bottom: 20px !important;
+                line-height: 1.3;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0 !important;
                 margin-bottom: 20px !important;
             }
 
-            .result-card > div[style*="grid"] {
-                grid-template-columns: 1fr !important;
-                gap: 8px !important;
+            .metric {
+                padding: 12px 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                border-bottom: 1px solid var(--border-color);
             }
 
-            .metric {
-                padding: 10px 0;
-                flex-wrap: wrap;
-                gap: 8px;
+            .metric:hover {
+                padding: 12px 10px;
+                margin: 0 -10px;
             }
 
             .metric-label {
-                font-size: 0.95em;
-                flex: 1 1 100%;
+                font-size: 0.9em;
+                width: 100%;
+                color: var(--text-secondary);
             }
 
             .metric-value {
-                font-size: 1em;
-                flex: 1 1 100%;
+                font-size: 1.05em;
+                width: 100%;
                 text-align: left;
+                color: var(--success-color);
             }
 
             .protocol-section {
@@ -845,8 +1006,30 @@
                 font-size: 15px;
             }
 
-            .result-card h3 {
+            .result-title {
                 font-size: 1.2em !important;
+                margin-bottom: 15px !important;
+            }
+
+            .metrics-grid {
+                margin-bottom: 15px !important;
+            }
+
+            .metric {
+                padding: 10px 0;
+            }
+
+            .metric:hover {
+                padding: 10px 8px;
+                margin: 0 -8px;
+            }
+
+            .metric-label {
+                font-size: 0.85em;
+            }
+
+            .metric-value {
+                font-size: 1em;
             }
 
             .protocol-header h4 {
@@ -871,6 +1054,20 @@
                 padding: 10px 12px;
                 font-size: 14px;
             }
+
+            .select-trigger {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .custom-options {
+                max-height: 200px;
+            }
+
+            .custom-options li {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -878,7 +1075,7 @@
 <div class="container">
 
     <div class="demo-section">
-        <h2 style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2em; font-weight: 700; margin-bottom: 35px;">
+        <h2 style="text-align: center; color: var(--primary-color); font-size: 2em; font-weight: 700; margin-bottom: 35px;">
             🔬 🧬 AI-Guided Polymer Selection Platform
         </h2>
 
@@ -886,11 +1083,21 @@
             <form id="polymerForm">
                 <div class="form-group">
                     <label for="polymer">Target Polymers</label>
-                    <select id="polymer" required>
+                    <div class="custom-select" data-name="polymer">
+                        <div class="select-trigger">
+                            <span>Select polymer...</span>
+                        </div>
+                        <ol class="custom-options">
+                            <li data-value="gelatin">Gelatin</li>
+                            <li data-value="pva">PVA</li>
+                            <li data-value="collagen">Collagen</li>
+                        </ol>
+                    </div>
+                    <select id="polymer" class="hidden" required>
+                        <option value="">Select polymer...</option>
                         <option value="gelatin">Gelatin</option>
                         <option value="pva">PVA</option>
                         <option value="collagen">Collagen</option>
-
                     </select>
                 </div>
 
@@ -906,7 +1113,19 @@
 
                 <div class="form-group">
                     <label for="scaffold">Scaffold Format</label>
-                    <select id="scaffold" required>
+                    <div class="custom-select" data-name="scaffold">
+                        <div class="select-trigger">
+                            <span>Select scaffold format...</span>
+                        </div>
+                        <ol class="custom-options">
+                            <li data-value="hydrogel">Hydrogel</li>
+                            <li data-value="porous">Porous Scaffold</li>
+                            <li data-value="fiber">Fiber</li>
+                            <li data-value="microparticle">Microparticle</li>
+                        </ol>
+                    </div>
+                    <select id="scaffold" class="hidden" required>
+                        <option value="">Select scaffold format...</option>
                         <option value="hydrogel">Hydrogel</option>
                         <option value="porous">Porous Scaffold</option>
                         <option value="fiber">Fiber</option>
@@ -928,6 +1147,81 @@
 </div>
 
 <script>
+    // Custom Dropdown Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const customSelects = document.querySelectorAll('.custom-select');
+
+        customSelects.forEach(select => {
+            const trigger = select.querySelector('.select-trigger');
+            const options = select.querySelector('.custom-options');
+            const hiddenSelect = document.getElementById(select.dataset.name);
+            const optionsList = options.querySelectorAll('li');
+
+            // Toggle dropdown
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+
+                // Close other dropdowns
+                document.querySelectorAll('.custom-select').forEach(s => {
+                    if (s !== select) {
+                        s.querySelector('.select-trigger').classList.remove('active');
+                        s.querySelector('.custom-options').classList.remove('show');
+                    }
+                });
+
+                // Toggle current dropdown
+                trigger.classList.toggle('active');
+                options.classList.toggle('show');
+            });
+
+            // Select option
+            optionsList.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+
+                    // Remove selected class from all options
+                    optionsList.forEach(opt => opt.classList.remove('selected'));
+
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+
+                    // Update trigger text
+                    const span = trigger.querySelector('span');
+                    span.textContent = option.textContent;
+                    span.classList.remove('placeholder');
+
+                    // Update hidden select
+                    hiddenSelect.value = option.dataset.value;
+
+                    // Close dropdown
+                    trigger.classList.remove('active');
+                    options.classList.remove('show');
+
+                    // Trigger change event for validation
+                    hiddenSelect.dispatchEvent(new Event('change'));
+                });
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.custom-select').forEach(select => {
+                select.querySelector('.select-trigger').classList.remove('active');
+                select.querySelector('.custom-options').classList.remove('show');
+            });
+        });
+
+        // Close dropdowns on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.custom-select').forEach(select => {
+                    select.querySelector('.select-trigger').classList.remove('active');
+                    select.querySelector('.custom-options').classList.remove('show');
+                });
+            }
+        });
+    });
+
     document.getElementById('polymerForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -1112,11 +1406,11 @@ Total Time: ~4-5 days (including crosslinking and QC)`
 
         resultsContent.innerHTML = recommendations.map((rec, i) => `
             <div class="result-card">
-                <h3 style="font-size: 1.8em; margin-bottom: 25px;">
+                <h3 class="result-title">
                     #${i + 1}: ${rec.name}
                 </h3>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 12px; margin-bottom: 30px;">
+                <div class="metrics-grid">
                     <div class="metric">
                         <span class="metric-label">Composition</span>
                         <span class="metric-value">${rec.composition}</span>
