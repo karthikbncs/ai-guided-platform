@@ -1,0 +1,1031 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Guided Polymer Selection Platform</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-color: #10b981;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 24px;
+            padding: 60px 40px;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .new-feature-tag {
+            color: #f5576c;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin: 15px 0;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            font-size: 0.95em;
+            letter-spacing: 0.5px;
+        }
+
+        .status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: #667eea;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h2 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 1.05em;
+            transition: all 0.2s ease;
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
+        }
+
+        .card li:hover {
+            color: #667eea;
+            padding-left: 32px;
+        }
+
+        .card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-size: 1.05em;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .button:active {
+            transform: translateY(-1px);
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .demo-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .demo-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--text-primary);
+        }
+
+        input:hover, select:hover {
+            border-color: #667eea;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            margin-top: 40px;
+            padding: 0;
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .results > h3 {
+            color: var(--text-primary);
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .result-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .result-card h3 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric:hover {
+            padding-left: 8px;
+            background: rgba(102, 126, 234, 0.05);
+            margin: 0 -8px;
+            padding-left: 16px;
+            padding-right: 8px;
+            border-radius: 8px;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .metric-value {
+            color: var(--success-color);
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .protocol-section {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            border: 2px solid #667eea;
+        }
+
+        .protocol-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .protocol-header h4 {
+            color: var(--text-primary);
+            font-size: 1.4em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lab-ready-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .protocol-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .protocol-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .protocol-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .protocol-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        .protocol-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #653a8e 100%);
+        }
+
+        .protocol-content pre {
+            white-space: pre-wrap;
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', monospace;
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .protocol-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .protocol-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .header {
+                padding: 40px 25px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .demo-section {
+                padding: 30px 20px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .links {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .protocol-actions {
+                flex-direction: column;
+            }
+
+            .protocol-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="demo-section">
+            <h2 style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2em; font-weight: 700; margin-bottom: 35px;">
+                🔬 🧬 AI-Guided Polymer Selection Platform
+            </h2>
+
+            <div class="demo-form">
+                <form id="polymerForm">
+<div class="form-group">
+                        <label for="viability">Target polymers </label>
+                        <select id="scaffold" required>
+                            <option value="gelatin">Gelatin</option>
+                            <option value="pva">PVA</option>
+                            <option value="collagen">Collagen</option>
+                            
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="viability">Desired Cell Viability (%)</label>
+                        <input type="number" id="viability" min="50" max="100" value="85" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="insulin">Target Insulin Level (ng/mL)</label>
+                        <input type="number" id="insulin" min="1" max="20" value="10" step="0.1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scaffold">Scaffold Format</label>
+                        <select id="scaffold" required>
+                            <option value="hydrogel">Hydrogel</option>
+                            <option value="porous">Porous Scaffold</option>
+                            <option value="fiber">Fiber</option>
+                            <option value="microparticle">Microparticle</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Get AI Recommendations 🚀
+                    </button>
+                </form>
+
+                <div id="results" class="results">
+                    <h3>🎯 Top Recommendations</h3>
+                    <div id="resultsContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('polymerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = e.target.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span> Processing...';
+
+            const viability = document.getElementById('viability').value;
+            const insulin = document.getElementById('insulin').value;
+            const scaffold = document.getElementById('scaffold').value;
+
+            // Simulate API delay for demo
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Demo recommendations (would normally call API)
+            const recommendations = [
+                {
+                    name: "PEG-Alginate Blend",
+                    composition: "60% PEG, 40% Alginate",
+                    confidence: "85%",
+                    viability: "85.0%",
+                    insulin_basal: "9.6 ng/mL",
+                    insulin_stimulated: "14.4 ng/mL",
+                    porosity: "75%",
+                    pore_size: "120 μm",
+                    fabrication_protocol: `═══════════════════════════════════════════════════════════════════
+DETAILED FABRICATION PROTOCOL
+═══════════════════════════════════════════════════════════════════
+
+COMPOSITION SPECIFICATIONS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Polymer Blend Ratio:
+  • PEG: 60.0% (w/w) → 6.00 g for 10.0 mL solution
+  • Alginate: 40.0% (w/w) → 0.80 g for 10.0 mL solution
+
+Target Scaffold Properties:
+  • Porosity: 75.0%
+  • Pore Size: 120.0 μm
+  • Elastic Modulus: 50.0 MPa
+  • Degradation Rate: 14 days
+  • Crosslink Density: 0.70
+
+📋 MATERIALS REQUIRED:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  □ PEG (pharmaceutical grade): 6.00 g
+  □ Alginate (pharmaceutical grade): 0.80 g
+  □ Distilled water or PBS: 10.0 mL
+  □ UV photoinitiator (Irgacure 2959): 0.16% w/v
+  □ Calcium chloride (CaCl₂): 155 mM solution
+  □ Magnetic stirrer and stir bar
+  □ Analytical balance (±0.0001 g)
+  □ Sterile molds
+  □ Freeze dryer
+  □ UV crosslinking chamber (365 nm)
+
+STEP 1: POLYMER SOLUTION PREPARATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1.1. Weigh polymers accurately:
+     - PEG: 6.00 ± 0.01 g
+     - Alginate: 0.80 ± 0.01 g
+
+1.2. Add 10.0 mL PBS to sterile beaker
+
+1.3. Add PEG gradually while stirring at 300 rpm
+
+1.4. Add Alginate in small portions over 10 minutes
+
+1.5. Stir continuously at 400 rpm for 3 hours
+
+1.6. Remove air bubbles by vacuum degassing (15 min)
+
+STEP 2: CROSSLINKING AGENT PREPARATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2.1. UV photoinitiator: 0.16% w/v in 1.0 mL PBS
+2.2. CaCl₂ solution: 155 mM in distilled water
+2.3. Add photoinitiator dropwise to polymer solution
+2.4. Mix thoroughly for 20 minutes at RT
+
+STEP 3: SCAFFOLD FORMATION (Freeze-drying)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3.1. Pour solution into pre-cooled molds
+3.2. Freeze at -80°C for 18 hours
+     (Controlled rate: 1°C/min)
+3.3. Transfer to freeze dryer
+3.4. Lyophilize at 0.05 mbar for 36 hours
+3.5. Remove scaffolds from molds carefully
+
+STEP 4: CROSSLINKING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PEG Crosslinking:
+  • UV exposure: 365 nm, 15 minutes
+  • Intensity: 7 mW/cm²
+  • Rotate samples every 5 minutes
+
+Alginate Crosslinking:
+  • Immerse in 155 mM CaCl₂ solution
+  • Duration: 24 minutes at room temperature
+  • Gentle agitation
+
+STEP 5: POST-PROCESSING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5.1. Wash 3× with distilled water (10 min each)
+5.2. Wash 2× with PBS pH 7.4 (10 min each)
+5.3. Soak in fresh PBS for 24h at 4°C
+     (Change PBS every 8 hours - minimum 3 changes)
+5.4. Verify pH: 7.2-7.6
+
+STEP 6: STERILIZATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+UV Sterilization (Recommended):
+  • 254 nm UV light for 30 minutes each side
+  • In laminar flow hood
+  • Air dry under UV for 15 additional minutes
+
+STEP 7: CHARACTERIZATION & QC
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Required Tests:
+  ✓ SEM imaging → Pore size: 120 ± 20 μm
+  ✓ Porosity measurement → Target: 75 ± 5%
+  ✓ Mechanical testing → Modulus: 50 ± 10 MPa
+  ✓ FTIR spectroscopy → Confirm crosslinking
+  ✓ Degradation study → Monitor 14 days
+  ✓ Biocompatibility → Viability >80%
+
+STEP 8: PRE-CONDITIONING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8.1. Equilibrate in CMRL-1066 medium
+     (37°C, 5% CO₂, 24 hours)
+
+8.2. Optional ECM coating:
+     - Fibronectin (10 μg/mL, 2 hours) OR
+     - Laminin (5 μg/mL, 2 hours)
+
+STEP 9: BETA-CELL SEEDING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9.1. Cell density: 2 × 10⁶ cells/mL
+9.2. Verify viability >90% (trypan blue)
+9.3. Seed 75 μL per scaffold
+9.4. Allow attachment for 3 hours
+9.5. Add culture medium carefully
+9.6. Culture: 37°C, 5% CO₂, 95% humidity
+
+⚠️  SAFETY NOTES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • Wear PPE (lab coat, gloves, safety goggles)
+  • UV exposure can be harmful - use shielding
+  • Work in biosafety cabinet for cell procedures
+  • Dispose of waste per institutional guidelines
+
+🛠️  TROUBLESHOOTING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Problem: Irregular pore structure
+→ Solution: Optimize freezing rate to 1°C/min
+
+Problem: Scaffold too brittle
+→ Solution: Increase crosslink density to 0.8
+
+Problem: Low cell viability
+→ Solution: Ensure complete reagent removal (more washing)
+
+Problem: Poor cell attachment
+→ Solution: Add fibronectin coating (10 μg/mL)
+
+✓ EXPECTED OUTCOMES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • Uniform pore structure with interconnectivity
+  • Mechanical properties suitable for beta-cells
+  • High cell viability (>85%)
+  • Insulin secretion: Basal 9.6 ng/mL, Stimulated 14.4 ng/mL
+  • Minimal inflammatory response
+  • Degradation matched to tissue regeneration (14 days)
+
+Total Time: ~4-5 days (including crosslinking and QC)`
+                }
+            ];
+
+            const resultsDiv = document.getElementById('results');
+            const resultsContent = document.getElementById('resultsContent');
+
+            resultsContent.innerHTML = recommendations.map((rec, i) => `
+                <div class="result-card">
+                    <h3 style="font-size: 1.8em; margin-bottom: 25px;">
+                        #${i + 1}: ${rec.name}
+                    </h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 12px; margin-bottom: 30px;">
+                        <div class="metric">
+                            <span class="metric-label">Composition</span>
+                            <span class="metric-value">${rec.composition}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Confidence</span>
+                            <span class="metric-value">${rec.confidence}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Viability</span>
+                            <span class="metric-value">${rec.viability}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Insulin (Basal)</span>
+                            <span class="metric-value">${rec.insulin_basal}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Insulin (Stimulated)</span>
+                            <span class="metric-value">${rec.insulin_stimulated}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Porosity</span>
+                            <span class="metric-value">${rec.porosity}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Pore Size</span>
+                            <span class="metric-value">${rec.pore_size}</span>
+                        </div>
+                    </div>
+
+                    <div class="protocol-section">
+                        <div class="protocol-header">
+                            <h4>🧪 Complete Fabrication Protocol</h4>
+                            <span class="lab-ready-badge">LAB-READY</span>
+                        </div>
+                        <div class="protocol-content">
+                            <pre>${rec.fabrication_protocol}</pre>
+                        </div>
+                        <div class="protocol-actions">
+                            <button onclick="copyProtocol(${i})" class="protocol-btn btn-copy">
+                                📋 Copy Protocol
+                            </button>
+                            <button onclick="printProtocol(${i})" class="protocol-btn btn-print">
+                                🖨️ Print Protocol
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            resultsDiv.classList.add('show');
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Reset button state
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
+
+        // Function to copy protocol to clipboard
+        window.copyProtocol = function(index) {
+            const recommendations = [
+                {
+                    fabrication_protocol: document.querySelectorAll('pre')[index].textContent
+                }
+            ];
+
+            const protocol = document.querySelectorAll('pre')[index].textContent;
+
+            navigator.clipboard.writeText(protocol).then(() => {
+                alert('✓ Protocol copied to clipboard!\n\nYou can now paste it into your lab notebook or text editor.');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy protocol. Please select and copy manually.');
+            });
+        };
+
+        // Function to print protocol
+        window.printProtocol = function(index) {
+            const protocol = document.querySelectorAll('pre')[index].textContent;
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Fabrication Protocol - Print</title>
+                    <style>
+                        body {
+                            font-family: 'Courier New', monospace;
+                            padding: 20px;
+                            line-height: 1.6;
+                            color: #333;
+                        }
+                        pre {
+                            white-space: pre-wrap;
+                            font-size: 12pt;
+                        }
+                        @media print {
+                            body { padding: 0; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <pre>${protocol}</pre>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            setTimeout(() => {
+                printWindow.print();
+            }, 250);
+        };
+    </script>
+</body>
+</html>
+
