@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -345,6 +346,9 @@
             transition: all 0.3s ease;
             background: white;
             color: var(--text-primary);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         input:hover, select:hover {
@@ -628,28 +632,52 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
-                padding: 20px 15px;
+                padding: 15px 10px;
             }
 
             h1 {
-                font-size: 2.2em;
+                font-size: 1.8em;
+                line-height: 1.2;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+                line-height: 1.5;
             }
 
             .header {
-                padding: 40px 25px;
+                padding: 30px 20px;
+                border-radius: 16px;
             }
 
             .card {
-                padding: 25px;
+                padding: 20px 15px;
+                border-radius: 16px;
+            }
+
+            .card h2 {
+                font-size: 1.3em;
+            }
+
+            .card li {
+                font-size: 0.95em;
+                padding: 10px 0;
+                padding-left: 24px;
             }
 
             .demo-section {
-                padding: 30px 20px;
+                padding: 25px 15px;
+                border-radius: 16px;
+            }
+
+            .demo-section h2 {
+                font-size: 1.5em !important;
+                margin-bottom: 25px !important;
             }
 
             .grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 15px;
             }
 
             .links {
@@ -659,136 +687,310 @@
             .button {
                 width: 100%;
                 justify-content: center;
+                padding: 14px 24px;
+                font-size: 0.95em;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-size: 0.95em;
+                margin-bottom: 8px;
+            }
+
+            input, select {
+                padding: 12px 14px;
+                font-size: 15px;
+            }
+
+            .submit-btn {
+                padding: 16px 32px;
+                font-size: 16px;
+            }
+
+            .result-card {
+                padding: 20px 15px;
+                border-radius: 16px;
+            }
+
+            .result-card h3 {
+                font-size: 1.4em !important;
+                margin-bottom: 20px !important;
+            }
+
+            .result-card > div[style*="grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+
+            .metric {
+                padding: 10px 0;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .metric-label {
+                font-size: 0.95em;
+                flex: 1 1 100%;
+            }
+
+            .metric-value {
+                font-size: 1em;
+                flex: 1 1 100%;
+                text-align: left;
+            }
+
+            .protocol-section {
+                padding: 20px 15px;
+                border-radius: 12px;
+                margin-top: 20px;
+            }
+
+            .protocol-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .protocol-header h4 {
+                font-size: 1.2em;
+            }
+
+            .lab-ready-badge {
+                font-size: 0.7em;
+                padding: 5px 12px;
+            }
+
+            .protocol-content {
+                padding: 15px;
+                max-height: 400px;
+                font-size: 0.85em;
+            }
+
+            .protocol-content pre {
+                font-size: 0.75em;
+                line-height: 1.5;
             }
 
             .protocol-actions {
                 flex-direction: column;
+                gap: 10px;
             }
 
             .protocol-btn {
                 width: 100%;
                 justify-content: center;
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .results > h3 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+
+            .new-feature-tag {
+                font-size: 1em;
+            }
+
+            .status {
+                padding: 10px 20px;
+                font-size: 0.85em;
+            }
+        }
+
+        /* Extra small devices (phones in portrait) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px 8px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .demo-section h2 {
+                font-size: 1.3em !important;
+            }
+
+            .card {
+                padding: 15px 12px;
+            }
+
+            .card h2 {
+                font-size: 1.2em;
+            }
+
+            .demo-section {
+                padding: 20px 12px;
+            }
+
+            .button {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .submit-btn {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+
+            .result-card h3 {
+                font-size: 1.2em !important;
+            }
+
+            .protocol-header h4 {
+                font-size: 1.1em;
+            }
+
+            .protocol-content {
+                padding: 12px;
+                max-height: 350px;
+            }
+
+            .protocol-content pre {
+                font-size: 0.7em;
+            }
+
+            .protocol-btn {
+                padding: 10px 16px;
+                font-size: 0.85em;
+            }
+
+            input, select {
+                padding: 10px 12px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <div class="demo-section">
-            <h2 style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2em; font-weight: 700; margin-bottom: 35px;">
-                🔬 🧬 AI-Guided Polymer Selection Platform
-            </h2>
+    <div class="demo-section">
+        <h2 style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2em; font-weight: 700; margin-bottom: 35px;">
+            🔬 🧬 AI-Guided Polymer Selection Platform
+        </h2>
 
-            <div class="demo-form">
-                <form id="polymerForm">
-<div class="form-group">
-                        <label for="viability">Target polymers </label>
-                        <select id="scaffold" required>
-                            <option value="gelatin">Gelatin</option>
-                            <option value="pva">PVA</option>
-                            <option value="collagen">Collagen</option>
-                            
-                        </select>
-                    </div>
+        <div class="demo-form">
+            <form id="polymerForm">
+                <div class="form-group">
+                    <label for="polymer">Target Polymers</label>
+                    <select id="polymer" required>
+                        <option value="gelatin">Gelatin</option>
+                        <option value="pva">PVA</option>
+                        <option value="collagen">Collagen</option>
 
-                    <div class="form-group">
-                        <label for="viability">Desired Cell Viability (%)</label>
-                        <input type="number" id="viability" min="50" max="100" value="85" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="insulin">Target Insulin Level (ng/mL)</label>
-                        <input type="number" id="insulin" min="1" max="20" value="10" step="0.1" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="scaffold">Scaffold Format</label>
-                        <select id="scaffold" required>
-                            <option value="hydrogel">Hydrogel</option>
-                            <option value="porous">Porous Scaffold</option>
-                            <option value="fiber">Fiber</option>
-                            <option value="microparticle">Microparticle</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="submit-btn">
-                        Get AI Recommendations 🚀
-                    </button>
-                </form>
-
-                <div id="results" class="results">
-                    <h3>🎯 Top Recommendations</h3>
-                    <div id="resultsContent"></div>
+                    </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="viability">Desired Cell Viability (%)</label>
+                    <input type="number" id="viability" min="50" max="100" value="85" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="insulin">Target Insulin Level (ng/mL)</label>
+                    <input type="number" id="insulin" min="1" max="20" value="10" step="0.1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="scaffold">Scaffold Format</label>
+                    <select id="scaffold" required>
+                        <option value="hydrogel">Hydrogel</option>
+                        <option value="porous">Porous Scaffold</option>
+                        <option value="fiber">Fiber</option>
+                        <option value="microparticle">Microparticle</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Get AI Recommendations 🚀
+                </button>
+            </form>
+
+            <div id="results" class="results">
+                <h3>🎯 Top Recommendations</h3>
+                <div id="resultsContent"></div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        document.getElementById('polymerForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+<script>
+    document.getElementById('polymerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-            const submitBtn = e.target.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
+        const submitBtn = e.target.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
 
-            // Show loading state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading"></span> Processing...';
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span> Processing...';
 
-            const viability = document.getElementById('viability').value;
-            const insulin = document.getElementById('insulin').value;
-            const scaffold = document.getElementById('scaffold').value;
+        const viability = document.getElementById('viability').value;
+        const insulin = document.getElementById('insulin').value;
+        const scaffold = document.getElementById('scaffold').value;
 
-            // Simulate API delay for demo
-            await new Promise(resolve => setTimeout(resolve, 1500));
+        // Simulate API delay for demo
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
-            // Demo recommendations (would normally call API)
-            const recommendations = [
-                {
-                    name: "PEG-Alginate Blend",
-                    composition: "60% PEG, 40% Alginate",
-                    confidence: "85%",
-                    viability: "85.0%",
-                    insulin_basal: "9.6 ng/mL",
-                    insulin_stimulated: "14.4 ng/mL",
-                    porosity: "75%",
-                    pore_size: "120 μm",
-                    fabrication_protocol: `═══════════════════════════════════════════════════════════════════
+        // Demo recommendations (would normally call API)
+        const recommendations = [
+            {
+                name: "PEG-Alginate Blend",
+                composition: "60% PEG, 40% Alginate",
+                confidence: "85%",
+                viability: "85.0%",
+                insulin_basal: "9.6 ng/mL",
+                insulin_stimulated: "14.4 ng/mL",
+                porosity: "75%",
+                pore_size: "120 μm",
+                fabrication_protocol: `═══════════════════════════════════════════════════════════════════
 DETAILED FABRICATION PROTOCOL
 ═══════════════════════════════════════════════════════════════════
 
 COMPOSITION SPECIFICATIONS:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Polymer Blend Ratio:
-  • PEG: 60.0% (w/w) → 6.00 g for 10.0 mL solution
-  • Alginate: 40.0% (w/w) → 0.80 g for 10.0 mL solution
+• PEG: 60.0% (w/w) → 6.00 g for 10.0 mL solution
+• Alginate: 40.0% (w/w) → 0.80 g for 10.0 mL solution
 
 Target Scaffold Properties:
-  • Porosity: 75.0%
-  • Pore Size: 120.0 μm
-  • Elastic Modulus: 50.0 MPa
-  • Degradation Rate: 14 days
-  • Crosslink Density: 0.70
+• Porosity: 75.0%
+• Pore Size: 120.0 μm
+• Elastic Modulus: 50.0 MPa
+• Degradation Rate: 14 days
+• Crosslink Density: 0.70
 
 📋 MATERIALS REQUIRED:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  □ PEG (pharmaceutical grade): 6.00 g
-  □ Alginate (pharmaceutical grade): 0.80 g
-  □ Distilled water or PBS: 10.0 mL
-  □ UV photoinitiator (Irgacure 2959): 0.16% w/v
-  □ Calcium chloride (CaCl₂): 155 mM solution
-  □ Magnetic stirrer and stir bar
-  □ Analytical balance (±0.0001 g)
-  □ Sterile molds
-  □ Freeze dryer
-  □ UV crosslinking chamber (365 nm)
+□ PEG (pharmaceutical grade): 6.00 g
+□ Alginate (pharmaceutical grade): 0.80 g
+□ Distilled water or PBS: 10.0 mL
+□ UV photoinitiator (Irgacure 2959): 0.16% w/v
+□ Calcium chloride (CaCl₂): 155 mM solution
+□ Magnetic stirrer and stir bar
+□ Analytical balance (±0.0001 g)
+□ Sterile molds
+□ Freeze dryer
+□ UV crosslinking chamber (365 nm)
 
 STEP 1: POLYMER SOLUTION PREPARATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 1.1. Weigh polymers accurately:
-     - PEG: 6.00 ± 0.01 g
-     - Alginate: 0.80 ± 0.01 g
+ - PEG: 6.00 ± 0.01 g
+ - Alginate: 0.80 ± 0.01 g
 
 1.2. Add 10.0 mL PBS to sterile beaker
 
@@ -811,7 +1013,7 @@ STEP 3: SCAFFOLD FORMATION (Freeze-drying)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 3.1. Pour solution into pre-cooled molds
 3.2. Freeze at -80°C for 18 hours
-     (Controlled rate: 1°C/min)
+ (Controlled rate: 1°C/min)
 3.3. Transfer to freeze dryer
 3.4. Lyophilize at 0.05 mbar for 36 hours
 3.5. Remove scaffolds from molds carefully
@@ -819,48 +1021,48 @@ STEP 3: SCAFFOLD FORMATION (Freeze-drying)
 STEP 4: CROSSLINKING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 PEG Crosslinking:
-  • UV exposure: 365 nm, 15 minutes
-  • Intensity: 7 mW/cm²
-  • Rotate samples every 5 minutes
+• UV exposure: 365 nm, 15 minutes
+• Intensity: 7 mW/cm²
+• Rotate samples every 5 minutes
 
 Alginate Crosslinking:
-  • Immerse in 155 mM CaCl₂ solution
-  • Duration: 24 minutes at room temperature
-  • Gentle agitation
+• Immerse in 155 mM CaCl₂ solution
+• Duration: 24 minutes at room temperature
+• Gentle agitation
 
 STEP 5: POST-PROCESSING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 5.1. Wash 3× with distilled water (10 min each)
 5.2. Wash 2× with PBS pH 7.4 (10 min each)
 5.3. Soak in fresh PBS for 24h at 4°C
-     (Change PBS every 8 hours - minimum 3 changes)
+ (Change PBS every 8 hours - minimum 3 changes)
 5.4. Verify pH: 7.2-7.6
 
 STEP 6: STERILIZATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 UV Sterilization (Recommended):
-  • 254 nm UV light for 30 minutes each side
-  • In laminar flow hood
-  • Air dry under UV for 15 additional minutes
+• 254 nm UV light for 30 minutes each side
+• In laminar flow hood
+• Air dry under UV for 15 additional minutes
 
 STEP 7: CHARACTERIZATION & QC
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Required Tests:
-  ✓ SEM imaging → Pore size: 120 ± 20 μm
-  ✓ Porosity measurement → Target: 75 ± 5%
-  ✓ Mechanical testing → Modulus: 50 ± 10 MPa
-  ✓ FTIR spectroscopy → Confirm crosslinking
-  ✓ Degradation study → Monitor 14 days
-  ✓ Biocompatibility → Viability >80%
+✓ SEM imaging → Pore size: 120 ± 20 μm
+✓ Porosity measurement → Target: 75 ± 5%
+✓ Mechanical testing → Modulus: 50 ± 10 MPa
+✓ FTIR spectroscopy → Confirm crosslinking
+✓ Degradation study → Monitor 14 days
+✓ Biocompatibility → Viability >80%
 
 STEP 8: PRE-CONDITIONING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 8.1. Equilibrate in CMRL-1066 medium
-     (37°C, 5% CO₂, 24 hours)
+ (37°C, 5% CO₂, 24 hours)
 
 8.2. Optional ECM coating:
-     - Fibronectin (10 μg/mL, 2 hours) OR
-     - Laminin (5 μg/mL, 2 hours)
+ - Fibronectin (10 μg/mL, 2 hours) OR
+ - Laminin (5 μg/mL, 2 hours)
 
 STEP 9: BETA-CELL SEEDING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -873,10 +1075,10 @@ STEP 9: BETA-CELL SEEDING
 
 ⚠️  SAFETY NOTES:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  • Wear PPE (lab coat, gloves, safety goggles)
-  • UV exposure can be harmful - use shielding
-  • Work in biosafety cabinet for cell procedures
-  • Dispose of waste per institutional guidelines
+• Wear PPE (lab coat, gloves, safety goggles)
+• UV exposure can be harmful - use shielding
+• Work in biosafety cabinet for cell procedures
+• Dispose of waste per institutional guidelines
 
 🛠️  TROUBLESHOOTING:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -894,138 +1096,138 @@ Problem: Poor cell attachment
 
 ✓ EXPECTED OUTCOMES:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  • Uniform pore structure with interconnectivity
-  • Mechanical properties suitable for beta-cells
-  • High cell viability (>85%)
-  • Insulin secretion: Basal 9.6 ng/mL, Stimulated 14.4 ng/mL
-  • Minimal inflammatory response
-  • Degradation matched to tissue regeneration (14 days)
+• Uniform pore structure with interconnectivity
+• Mechanical properties suitable for beta-cells
+• High cell viability (>85%)
+• Insulin secretion: Basal 9.6 ng/mL, Stimulated 14.4 ng/mL
+• Minimal inflammatory response
+• Degradation matched to tissue regeneration (14 days)
 
 Total Time: ~4-5 days (including crosslinking and QC)`
-                }
-            ];
+            }
+        ];
 
-            const resultsDiv = document.getElementById('results');
-            const resultsContent = document.getElementById('resultsContent');
+        const resultsDiv = document.getElementById('results');
+        const resultsContent = document.getElementById('resultsContent');
 
-            resultsContent.innerHTML = recommendations.map((rec, i) => `
-                <div class="result-card">
-                    <h3 style="font-size: 1.8em; margin-bottom: 25px;">
-                        #${i + 1}: ${rec.name}
-                    </h3>
+        resultsContent.innerHTML = recommendations.map((rec, i) => `
+            <div class="result-card">
+                <h3 style="font-size: 1.8em; margin-bottom: 25px;">
+                    #${i + 1}: ${rec.name}
+                </h3>
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 12px; margin-bottom: 30px;">
-                        <div class="metric">
-                            <span class="metric-label">Composition</span>
-                            <span class="metric-value">${rec.composition}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Confidence</span>
-                            <span class="metric-value">${rec.confidence}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Viability</span>
-                            <span class="metric-value">${rec.viability}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Insulin (Basal)</span>
-                            <span class="metric-value">${rec.insulin_basal}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Insulin (Stimulated)</span>
-                            <span class="metric-value">${rec.insulin_stimulated}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Porosity</span>
-                            <span class="metric-value">${rec.porosity}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Pore Size</span>
-                            <span class="metric-value">${rec.pore_size}</span>
-                        </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 12px; margin-bottom: 30px;">
+                    <div class="metric">
+                        <span class="metric-label">Composition</span>
+                        <span class="metric-value">${rec.composition}</span>
                     </div>
-
-                    <div class="protocol-section">
-                        <div class="protocol-header">
-                            <h4>🧪 Complete Fabrication Protocol</h4>
-                            <span class="lab-ready-badge">LAB-READY</span>
-                        </div>
-                        <div class="protocol-content">
-                            <pre>${rec.fabrication_protocol}</pre>
-                        </div>
-                        <div class="protocol-actions">
-                            <button onclick="copyProtocol(${i})" class="protocol-btn btn-copy">
-                                📋 Copy Protocol
-                            </button>
-                            <button onclick="printProtocol(${i})" class="protocol-btn btn-print">
-                                🖨️ Print Protocol
-                            </button>
-                        </div>
+                    <div class="metric">
+                        <span class="metric-label">Confidence</span>
+                        <span class="metric-value">${rec.confidence}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Viability</span>
+                        <span class="metric-value">${rec.viability}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Insulin (Basal)</span>
+                        <span class="metric-value">${rec.insulin_basal}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Insulin (Stimulated)</span>
+                        <span class="metric-value">${rec.insulin_stimulated}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Porosity</span>
+                        <span class="metric-value">${rec.porosity}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Pore Size</span>
+                        <span class="metric-value">${rec.pore_size}</span>
                     </div>
                 </div>
-            `).join('');
 
-            resultsDiv.classList.add('show');
-            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                <div class="protocol-section">
+                    <div class="protocol-header">
+                        <h4>🧪 Complete Fabrication Protocol</h4>
+                        <span class="lab-ready-badge">LAB-READY</span>
+                    </div>
+                    <div class="protocol-content">
+                        <pre>${rec.fabrication_protocol}</pre>
+                    </div>
+                    <div class="protocol-actions">
+                        <button onclick="copyProtocol(${i})" class="protocol-btn btn-copy">
+                            📋 Copy Protocol
+                        </button>
+                        <button onclick="printProtocol(${i})" class="protocol-btn btn-print">
+                            🖨️ Print Protocol
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
 
-            // Reset button state
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
+        resultsDiv.classList.add('show');
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+    });
+
+    // Function to copy protocol to clipboard
+    window.copyProtocol = function(index) {
+        const recommendations = [
+            {
+                fabrication_protocol: document.querySelectorAll('pre')[index].textContent
+            }
+        ];
+
+        const protocol = document.querySelectorAll('pre')[index].textContent;
+
+        navigator.clipboard.writeText(protocol).then(() => {
+            alert('✓ Protocol copied to clipboard!\n\nYou can now paste it into your lab notebook or text editor.');
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            alert('Failed to copy protocol. Please select and copy manually.');
         });
+    };
 
-        // Function to copy protocol to clipboard
-        window.copyProtocol = function(index) {
-            const recommendations = [
-                {
-                    fabrication_protocol: document.querySelectorAll('pre')[index].textContent
-                }
-            ];
-
-            const protocol = document.querySelectorAll('pre')[index].textContent;
-
-            navigator.clipboard.writeText(protocol).then(() => {
-                alert('✓ Protocol copied to clipboard!\n\nYou can now paste it into your lab notebook or text editor.');
-            }).catch(err => {
-                console.error('Failed to copy:', err);
-                alert('Failed to copy protocol. Please select and copy manually.');
-            });
-        };
-
-        // Function to print protocol
-        window.printProtocol = function(index) {
-            const protocol = document.querySelectorAll('pre')[index].textContent;
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>Fabrication Protocol - Print</title>
-                    <style>
-                        body {
-                            font-family: 'Courier New', monospace;
-                            padding: 20px;
-                            line-height: 1.6;
-                            color: #333;
-                        }
-                        pre {
-                            white-space: pre-wrap;
-                            font-size: 12pt;
-                        }
-                        @media print {
-                            body { padding: 0; }
-                        }
-                    </style>
-                </head>
-                <body>
-                    <pre>${protocol}</pre>
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            setTimeout(() => {
-                printWindow.print();
-            }, 250);
-        };
-    </script>
+    // Function to print protocol
+    window.printProtocol = function(index) {
+        const protocol = document.querySelectorAll('pre')[index].textContent;
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>Fabrication Protocol - Print</title>
+                <style>
+                    body {
+                        font-family: 'Courier New', monospace;
+                        padding: 20px;
+                        line-height: 1.6;
+                        color: #333;
+                    }
+                    pre {
+                        white-space: pre-wrap;
+                        font-size: 12pt;
+                    }
+                    @media print {
+                        body { padding: 0; }
+                    }
+                </style>
+            </head>
+            <body>
+                <pre>${protocol}</pre>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        setTimeout(() => {
+            printWindow.print();
+        }, 250);
+    };
+</script>
 </body>
 </html>
 
